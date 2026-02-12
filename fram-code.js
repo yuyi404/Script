@@ -1,11 +1,19 @@
+/*
+
 ===================
 【 QX  脚本配置 】 :
 ===================
 
+[rewrite_local]
+^https?:\/\/.*gate-obt\.nqf\.qq\.com url script-request-header 
 
 
 
 
+
+
+
+*/
 
 
 ;(async()=>{
