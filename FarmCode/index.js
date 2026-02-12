@@ -1,25 +1,26 @@
 
 /*
 ===================
-【 QX 脚本配置 】:
+【 QX  脚本配置 】 :
 ===================
 
 [rewrite_local]
-https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubusercontent.com/yuyi404/Script/master/FarmCode/index.js
+https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubusercontent.com/yuyi404/Script/refs/heads/main/fram-code.js
 
 */
 
 ;(async () => {
   const url = $request.url;
 
+  // 不是目标接口 → 直接放行
   if (!url.includes('gate-obt.nqf.qq.com/prod/ws')) {
     $done({});
     return;
   }
 
-  // 只抓一次
-  if (globalThis.codeCaptured) {
-    $done({});
+  // 已经抓到过 → 直接拦截
+  if (globalThis.caught) {
+    $done({ status: 'reject' });
     return;
   }
 
@@ -29,20 +30,29 @@ https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubuse
   const platform = platformMatch ? platformMatch[1] : '';
 
   if (!code) {
-    $done({});
+    $notify('获取失败', '', '未拿到 code');
+    globalThis.caught = true;
+    $done({ status: 'reject' });
     return;
   }
 
-  globalThis.codeCaptured = true;
+  // 抓到一次就标记
+  globalThis.caught = true;
 
-  let cmd = '';
+  let name, suffix;
   if (platform === 'qq') {
-    cmd = `cd qq-farm-bot && pm2 start "node client.js --code ${code}" --name "qq-bot"`;
+    name = 'qq-bot';
+    suffix = '';
   } else {
-    cmd = `cd qq-farm-bot && pm2 start "node client.js --code ${code} --wx" --name "wx-bot"`;
+    name = 'wx-bot';
+    suffix = ' --wx';
   }
 
-  // 只通知一次
-  $notify('农场 code 获取成功', '复制去服务器运行', cmd);
-  $done({});
+  const cmd = `cd qq-farm-bot && pm2 start "node client.js --code ${code}${suffix}" --name "${name}"`;
+
+  // 只弹这一次
+  $notify('已获取 code', '终端命令', cmd);
+
+  // 抓到后立即拦截
+  $done({ status: 'reject' });
 })();
