@@ -5,7 +5,7 @@
 ===================
 
 [rewrite_local]
-https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubusercontent.com/yuyi404/Script/refs/heads/main/fram-code.js
+https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubusercontent.com/yuyi404/Script/refs/heads/master/FarmCode/index.js
 
 */
 
