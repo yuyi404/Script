@@ -12,14 +12,13 @@ https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubuse
 ;(async () => {
   const url = $request.url;
 
-  // 只处理登录接口
   if (!url.includes('gate-obt.nqf.qq.com/prod/ws')) {
     $done({});
     return;
   }
 
-  // 已经抓到过 → 放行，不再拦截
-  if (global.caughtFarmCode) {
+  // 只抓一次
+  if (globalThis.codeCaptured) {
     $done({});
     return;
   }
@@ -34,8 +33,7 @@ https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubuse
     return;
   }
 
-  // 标记已抓到，以后不再拦截
-  global.caughtFarmCode = true;
+  globalThis.codeCaptured = true;
 
   let cmd = '';
   if (platform === 'qq') {
@@ -44,9 +42,7 @@ https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubuse
     cmd = `cd qq-farm-bot && pm2 start "node client.js --code ${code} --wx" --name "wx-bot"`;
   }
 
-  // 只弹一次通知
-  $notify('已获取农场Code', '服务器运行命令', cmd);
-
-  // 拦截这次请求（你要的拦截）
-  $done({ status: 'reject' });
+  // 只通知一次
+  $notify('农场 code 获取成功', '复制去服务器运行', cmd);
+  $done({});
 })();
