@@ -44,7 +44,7 @@ https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubuse
     suffix = ' --wx';
   }
 
-  const cmd = `cd qq-farm-bot && pm2 start "node client.js --code ${code}${suffix}" --name "${name}"`;
+  const cmd = `pm2 start "node client.js --code ${code}${suffix}" --name "${name}"`;
 
   $notify('已获取 code', '终端命令', cmd);
 
