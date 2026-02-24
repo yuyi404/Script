@@ -5,8 +5,7 @@
 ===================
 
 [rewrite_local]
-https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubusercontent.com/yuyi404/Script/refs/heads/main/fram-code.js
-
+https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubusercontent.com/yuyi404/Script/master/farm-code.js
 */
 
 
@@ -45,9 +44,9 @@ https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubuse
     suffix = ' --wx';
   }
 
-  const cmd = `cd qq-farm-bot && pm2 start "node client.js --code ${code}${suffix}" --name "${name}"`;
+  const cmd = `${code}
 
-  $notify('已获取 code', '终端命令', cmd);
+  $notify('已获取 code');
 
   $done({ status: 'reject' });
 })();
