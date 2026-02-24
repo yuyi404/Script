@@ -44,7 +44,7 @@ https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubuse
     suffix = ' --wx';
   }
 
-  const cmd = `${code}
+  const cmd = `${code}`;
 
   $notify('已获取 code');
 
