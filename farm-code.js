@@ -1,14 +1,3 @@
-/*
-
-===================
-【 QX  脚本配置 】 :
-===================
-
-[rewrite_local]
-https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubusercontent.com/yuyi404/Script/master/farm-code.js
-*/
-
-
 ;(async()=>{
   const url = $request.url;
 
@@ -46,7 +35,7 @@ https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubuse
 
   const cmd = `${code}`;
 
-  $notify('已获取 code', `code` cmd);
+  $notify('已获取 code', '已获取', cmd);
 
   $done({ status: 'reject' });
 })();
