@@ -46,7 +46,7 @@ https:\/\/gate-obt\.nqf\.qq\.com url script-request-header https://raw.githubuse
 
   const cmd = `${code}`;
 
-  $notify('已获取 code', `code cmd`,);
+  $notify('已获取 code', `code` cmd);
 
   $done({ status: 'reject' });
 })();
