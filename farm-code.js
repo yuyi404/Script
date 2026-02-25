@@ -39,3 +39,26 @@
 
   $done({ status: 'reject' });
 })();
+
+
+
+
+/*  
+loon脚本
+*/
+
+
+;(async () => {
+  const url = $request.url;
+  const headers = $request.headers;
+
+  // 提取 code
+  const codeMatch = url.match(/code=([^&]+)/);
+  const code = codeMatch ? codeMatch[1] : "未获取到 code";
+
+  // 只通知 code
+  $notification.post("已获取 CODE", "", code);
+
+  // 拦截请求
+  $done({ response: { status: 403 } });
+})();
