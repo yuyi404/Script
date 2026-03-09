@@ -3,9 +3,6 @@
 #!author=yuyi404
 #!version=1.0
 
-[Script]
-http-request ^https?://gate-obt\.nqf\.qq\.com/prod/ws script-path=https://raw.githubusercontent.com/yuyi404/Script/master/farm-code.js,max-size=0,requires-body=false
-
 
 [Script]
 http-request ^https?://gate-obt\.nqf\.qq\.com/prod/ws script-path=https://raw.githubusercontent.com/yuyi404/Script/master/farm-code.js
