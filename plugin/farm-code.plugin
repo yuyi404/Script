@@ -1,0 +1,10 @@
+#!name=农场CODE获取
+#!desc=拦截农场登录CODE并通知
+#!author=yuyi404
+#!version=1.0
+
+[Script]
+http-request ^https?://gate-obt\.nqf\.qq\.com/prod/ws script-path=https://raw.githubusercontent.com/yuyi404/Script/master/farm-code.js,max-size=0,requires-body=false
+
+[MITM]
+hostname = gate-obt.nqf.qq.com
