@@ -62,3 +62,35 @@ loon脚本
   // 拦截请求
   $done({ response: { status: 403 } });
 })();
+
+
+/*
+小火箭
+*/
+
+;(async()=>{
+  const url = $request.url;
+
+  if (!url.includes('gate-obt.nqf.qq.com/prod/ws')) {
+    $done({});
+    return;
+  }
+
+  if (globalThis.caught) {
+    $done({ response: { status: 403 } });
+    return;
+  }
+  globalThis.caught = true;
+
+  const codeMatch = url.match(/code=([^&]+)/);
+  const code = codeMatch ? codeMatch[1] : '';
+
+  if (!code) {
+    $notification.post("获取失败", "", "未拿到 code");
+    $done({ response: { status: 403 } });
+    return;
+  }
+
+  $notification.post("已获取 code", "", code);
+  $done({ response: { status: 403 } });
+})();
